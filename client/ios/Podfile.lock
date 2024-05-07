@@ -970,6 +970,10 @@ PODS:
     - React-debug
   - react-native-encrypted-storage (4.0.3):
     - React-Core
+  - react-native-geolocation (3.2.1):
+    - glog
+    - RCT-Folly (= 2022.05.16.00)
+    - React-Core
   - react-native-google-maps (1.14.0):
     - Google-Maps-iOS-Utils (= 4.2.2)
     - GoogleMaps (= 7.4.0)
@@ -1151,6 +1155,8 @@ PODS:
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
+  - RNPermissions (4.1.5):
+    - React-Core
   - RNReanimated (3.8.1):
     - glog
     - RCT-Folly (= 2022.05.16.00)
@@ -1217,6 +1223,7 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
   - react-native-encrypted-storage (from `../node_modules/react-native-encrypted-storage`)
+  - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - react-native-google-maps (from `../node_modules/react-native-maps`)
   - react-native-maps (from `../node_modules/react-native-maps`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
@@ -1242,6 +1249,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCMaskedView (from `../node_modules/@react-native-masked-view/masked-view`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -1322,6 +1330,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   react-native-encrypted-storage:
     :path: "../node_modules/react-native-encrypted-storage"
+  react-native-geolocation:
+    :path: "../node_modules/@react-native-community/geolocation"
   react-native-google-maps:
     :path: "../node_modules/react-native-maps"
   react-native-maps:
@@ -1372,6 +1382,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-masked-view/masked-view"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNPermissions:
+    :path: "../node_modules/react-native-permissions"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -1422,6 +1434,7 @@ SPEC CHECKSUMS:
   React-logger: 7b19bdfb254772a0332d6cd4d66eceb0678b6730
   React-Mapbuffer: 6f392912435adb8fbf4c3eee0e79a0a0b4e4b717
   react-native-encrypted-storage: db300a3f2f0aba1e818417c1c0a6be549038deb7
+  react-native-geolocation: ed9e1d132f576b9a4a503af46f9704413ea0dec1
   react-native-google-maps: 94df984b1647973baffe17c0b7b52828d6b69d94
   react-native-maps: cbf2f03bfeebfd7ec45966b066db13a075fd2af3
   react-native-safe-area-context: b97eb6f9e3b7f437806c2ce5983f479f8eb5de4b
@@ -1447,11 +1460,12 @@ SPEC CHECKSUMS:
   ReactCommon: 8cae78d3c3eceff20ee4bbca8bb73b675a45fd5d
   RNCMaskedView: 090213d32d8b3bb83a4dcb7d12c18f0152591906
   RNGestureHandler: bc2cdb2dc42facdf34992ae364b8a728e19a3686
+  RNPermissions: b792220f140e16653edaa8d8f01f81e98f39ef47
   RNReanimated: 8a4d86eb951a4a99d8e86266dc71d7735c0c30a9
   RNScreens: b6b64d956af3715adbfe84808694ae82d3fec74f
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 47d399a73c0c0caa9ff824e5c657eae31215bfee
 
-PODFILE CHECKSUM: 4e14bca282ba875f0f34dcaad567655caaeb10aa
+PODFILE CHECKSUM: e191e710d8232d5358f8f8274d15ad6b63f6da16
 
 COCOAPODS: 1.15.2
