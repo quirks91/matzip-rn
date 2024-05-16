@@ -11,7 +11,6 @@ import useAuth from '@/hooks/queries/useAuth';
 const CustomDrawerContent = (props: DrawerContentComponentProps) => {
   const {getProfileQuery, logoutMutation} = useAuth();
   const {email, nickname, imageUri, kakaoImageUri} = getProfileQuery.data || {};
-
   const handleLogout = () => {
     logoutMutation.mutate(null);
   }

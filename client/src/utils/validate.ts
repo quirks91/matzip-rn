@@ -21,7 +21,7 @@ function validateUser(values: UserInfomation) {
 }
 
 export function validateLogin(values: UserInfomation) {
-  return validateUser(values)
+  return validateUser(values);
 }
 
 export function validateSignup(
@@ -35,4 +35,17 @@ export function validateSignup(
   }
 
   return signupErrors;
+}
+
+export function validateAddPost(values: {title: string}) {
+  const errors = {
+    title: '',
+    description: '',
+  };
+
+  if (values.title.trim() === '') {
+    errors.title = '제목은 1~30자 이내로 입력해 주세요.';
+  }
+
+  return errors;
 }

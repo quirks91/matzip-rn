@@ -1,4 +1,4 @@
-import {Pressable, StyleSheet, View} from 'react-native';
+import {Alert, Pressable, StyleSheet, View} from 'react-native';
 import React, {useRef, useState} from 'react';
 import MapView, {
   Callout,
@@ -7,7 +7,7 @@ import MapView, {
   Marker,
   PROVIDER_GOOGLE,
 } from 'react-native-maps';
-import {colors} from '@/constants';
+import {alerts, colors, mapNavigations} from '@/constants';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {CompositeNavigationProp, useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -16,6 +16,7 @@ import {DrawerNavigationProp} from '@react-navigation/drawer';
 import {MainDrawerParamList} from '@/navigations/darwer/MainDrawerNavigator';
 import useUserLocation from '@/hooks/useUserLocation';
 import usePermission from '@/hooks/usePermission';
+import useGetMarkers from '@/hooks/queries/useGetMarkers';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -32,7 +33,9 @@ const MapHomeScreen = () => {
   const inset = useSafeAreaInsets();
   const navigation = useNavigation<Navigation>();
   const mapRef = useRef<MapView | null>(null);
-  const [selectLocation, setSelectLocation] = useState<LatLng>();
+  const [selectLocation, setSelectLocation] = useState<LatLng | null>();
+  const {data: markers = []} = useGetMarkers();
+
   usePermission('LOCATION');
 
   const handlePressUserLocation = () => {
@@ -53,6 +56,22 @@ const MapHomeScreen = () => {
     setSelectLocation(nativeEvent.coordinate);
   };
 
+  const handlePressAddPost = () => {
+    //
+    if (!selectLocation) {
+      return Alert.alert(
+        alerts.NOT_SELECTED_LOCATION.TITLE,
+        alerts.NOT_SELECTED_LOCATION.DESCRIPTION,
+      );
+    }
+
+    navigation.navigate(mapNavigations.ADD_POST, {
+      location: selectLocation,
+    });
+
+    setSelectLocation(null);
+  };
+
   return (
     <>
       <MapView
@@ -64,16 +83,14 @@ const MapHomeScreen = () => {
         showsMyLocationButton={false}
         customMapStyle={mapStyle}
         onLongPress={handleLongPressMapView}>
-        <CustomMarker
-          color="RED"
-          score={3}
-          coordinate={{latitude: 37.5226, longitude: 127.024612}}
-        />
-        <CustomMarker
-          color={'BLUE'}
-          score={1}
-          coordinate={{latitude: 37.5326, longitude: 127.024612}}
-        />
+        {markers.map(({id, color, score, ...coordinate}) => (
+          <CustomMarker
+            key={id}
+            color={color}
+            score={score}
+            coordinate={coordinate}
+          />
+        ))}
         {selectLocation && (
           <Callout>
             <Marker coordinate={selectLocation} />
@@ -86,6 +103,9 @@ const MapHomeScreen = () => {
         <Ionicons name="menu" color={colors.WHITE} size={25} />
       </Pressable>
       <View style={styles.buttonList}>
+        <Pressable style={styles.mapButton} onPress={handlePressAddPost}>
+          <MaterialIcons name="add" color={colors.WHITE} size={25} />
+        </Pressable>
         <Pressable style={styles.mapButton} onPress={handlePressUserLocation}>
           <MaterialIcons name="my-location" color={colors.WHITE} size={25} />
         </Pressable>
